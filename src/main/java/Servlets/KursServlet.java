@@ -35,8 +35,8 @@ public class KursServlet extends HttpServlet {
         String top = "<html>" + "<body "+ backgroundstyler + ">"
                 + "<h1 style=\"color:black;background-color:cyan;text-align: center;margin: 0;\">Kurser table</h1>"
                 + "<a href=\"http://localhost:9090\"" +Navigationbar+ "> Home </a>"
-                + "<a href=\"http://localhost:9090/students\""+ Navigationbar +"> Studenter </a>"
-                + "<a href=\"http://localhost:9090/narvaro\"" + Navigationbar + "> Närvaro </a>"
+                + "<a href=/students"+ Navigationbar +"> Studenter </a>"
+                + "<a href=/narvaro" + Navigationbar + "> Närvaro </a>"
                 + "<br>";
         try {
             out.println(top);

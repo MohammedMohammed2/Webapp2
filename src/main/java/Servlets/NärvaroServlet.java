@@ -41,8 +41,8 @@ public class NärvaroServlet extends HttpServlet {
         String top = "<html>" + "<body " + backgroundstyler + ">"
                 + "<h1 style=\"color:black;background-color:cyan;text-align: center;margin: 0;\">Närvaro table</h1>"
                 + "<a href=\"http://localhost:9090\"" + Navigationbar + "> Home </a>"
-                + "<a href=\"http://localhost:9090/students\"" + Navigationbar + "> Studenter </a>"
-                + "<a href=\"http://localhost:9090/kurser\"" + Navigationbar + "> Kurser </a>"
+                + "<a href=/students" + Navigationbar + "> Studenter </a>"
+                + "<a href=/kurser" + Navigationbar + "> Kurser </a>"
                 + "<br>";
         try {
             out.println(top);
