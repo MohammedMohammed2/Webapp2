@@ -30,9 +30,17 @@ public class StudentsServlet extends HttpServlet {
             "  text-decoration: none;\n" +
             "  font-size: 17px;color:black;background-color:cyan;\"";
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws
-            ServletException, IOException {
+    protected void doPost (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        tableData(request,response);
+        showForm(request,response);
+    }
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        tableData(request, response);
+        showForm(request, response);
+    }
 
+
+    private void tableData(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PrintWriter out = response.getWriter();
         String top = "<html>" + "<body " + backgroundstyler + ">"
                 + "<h1 style=\"color:black;background-color:cyan;text-align: center;margin: 0;\">Studenter som går till skolan</h1>"
@@ -45,11 +53,11 @@ public class StudentsServlet extends HttpServlet {
             out.println(top);
             try {
                 Class.forName("com.mysql.cj.jdbc.Driver");
-                con = DriverManager.getConnection("jdbc:mysql://localhost:3306/gritacademy","user", "user");
+                con = DriverManager.getConnection("jdbc:mysql://localhost:3306/gritacademy", "user", "user");
 
                 st = con.createStatement();
                 rs = st.executeQuery("SELECT * FROM studenter");
-                out.println("<table " + tablestyler+ ">");
+                out.println("<table " + tablestyler + ">");
                 out.println("<tr>");
                 out.println("<th> id </th>");
                 out.println("<th> Name </th>");
@@ -58,13 +66,13 @@ public class StudentsServlet extends HttpServlet {
                 out.println("<th> Hobby </th>");
                 out.println("</tr>");
 
-                while (rs.next()){
+                while (rs.next()) {
                     out.println("<tr style = 'text-align: center;'>");
-                    out.println("<td " + tablestyler + ">" +rs.getInt(1) +"</td>"
+                    out.println("<td " + tablestyler + ">" + rs.getInt(1) + "</td>"
                             + "<td " + tablestyler + ">" + rs.getString(2) + "</td>"
                             + "<td " + tablestyler + ">" + rs.getString(3) + "</td>"
                             + "<td " + tablestyler + ">" + rs.getString(4) + "</td>"
-                            + "<td " + tablestyler + ">"+ rs.getString(5) + "</td>");
+                            + "<td " + tablestyler + ">" + rs.getString(5) + "</td>");
                     out.println("</tr>");
                 }
                 con.close();
@@ -74,8 +82,28 @@ public class StudentsServlet extends HttpServlet {
             out.println("</table>");
             out.println("</body>");
             out.println("</html>");
-        }catch (Exception e) {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private void showForm(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        PrintWriter out = resp.getWriter();
+        String fname = req.getParameter("fname") == null ? "" : req.getParameter("fname");
+        String lname = req.getParameter("lname") == null ? "" : req.getParameter("lname");
+
+
+        out.println("<br>"
+            + "<div style='border:black solid; width:200px; padding:5px display:block; margin-left:auto; margin-right:auto; margin-top:5px; margin-bottom:5px;'>"
+            + "<form style='margin:5px;' action=/kurser method=POST>"
+            + "            <label for=fname>First Name:</label>"
+            + "            <input type=text id=fname name=fname required value=" + fname + " ><br><br>"
+            + "             <label for=fname>Last Name:</label>"
+            + "            <input type=text id=lname name=lname required value=" + lname + " ><br><br>"
+            + "            <input type=submit value=Submit>"
+            + "        </form>"
+            + "</div>"
+            + "<br>"
+        );
     }
 }
