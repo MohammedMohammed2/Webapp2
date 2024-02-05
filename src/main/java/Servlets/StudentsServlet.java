@@ -21,14 +21,14 @@ public class StudentsServlet extends HttpServlet {
     public static String tablestyler = "style='border: 1px solid black; background-color: #96D4D4; margin-left: auto; margin-right: auto; width:40%; height:40%; margin-top: 50px;'";
     public static String backgroundstyler = "style=\"background-image: url('https://i.pinimg.com/originals/5e/9f/e2/5e9fe2b0bde19a68a87a095f92bc38aa.jpg');\"";
 
-    public static String Navigationbar = " style=\"\n" +
-            "  float: left;\n" +
-            "  display: block;\n" +
-            "  color: black;\n" +
-            "  text-align: center;\n" +
-            "  padding: 14px 16px;\n" +
-            "  text-decoration: none;\n" +
-            "  font-size: 17px;color:black;background-color:cyan;\"";
+    public static String Navigationbar = " style=\"\n"
+            + "  float: left;\n"
+            + "  display: block;\n"
+            + "  color: black;\n"
+            + "  text-align: center;\n"
+            + "  padding: 14px 16px;\n"
+            + "  text-decoration: none;\n"
+            + "  font-size: 17px;color:black;background-color:cyan;\"";
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
