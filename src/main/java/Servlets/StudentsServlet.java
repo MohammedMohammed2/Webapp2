@@ -49,6 +49,7 @@ public class StudentsServlet extends HttpServlet {
                 + "<a href=\"http://localhost:9090\"" + Navigationbar + "> Home </a>"
                 + "<a href=narvaro" + Navigationbar + "> Närvaro </a>"
                 + "<a href=/kurser" + Navigationbar + "> Kurser </a>"
+                + "<a href=/AddStudent" + Navigationbar + "> Add Studdents </a>"
                 + "<br>";
 
         try {
@@ -115,6 +116,7 @@ public class StudentsServlet extends HttpServlet {
                 + "<a href=\"http://localhost:9090\"" + Navigationbar + "> Home </a>"
                 + "<a href=/narvaro" + Navigationbar + "> Närvaro </a>"
                 + "<a href=/kurser" + Navigationbar + "> Kurser </a>"
+                + "<a href=/AddStudent" + Navigationbar + "> Add Studdents </a>"
                 + "<br>";
 
         try {

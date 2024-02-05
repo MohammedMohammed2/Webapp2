@@ -43,6 +43,7 @@ public class NärvaroServlet extends HttpServlet {
                 + "<a href=\"http://localhost:9090\"" + Navigationbar + "> Home </a>"
                 + "<a href=/students" + Navigationbar + "> Studenter </a>"
                 + "<a href=/kurser" + Navigationbar + "> Kurser </a>"
+                + "<a href=/AddStudent" + Navigationbar + "> Add Studdents </a>"
                 + "<br>";
         try {
             out.println(top);
