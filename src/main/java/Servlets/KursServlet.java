@@ -32,10 +32,10 @@ public class KursServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PrintWriter out = response.getWriter();
-        String top = "<html>" + "<body "+ backgroundstyler + ">"
+        String top = "<html>" + "<body " + backgroundstyler + ">"
                 + "<h1 style=\"color:black;background-color:cyan;text-align: center;margin: 0;\">Kurser table</h1>"
-                + "<a href=\"http://localhost:9090\"" +Navigationbar+ "> Home </a>"
-                + "<a href=/students"+ Navigationbar +"> Studenter </a>"
+                + "<a href=\"http://localhost:9090\"" + Navigationbar + "> Home </a>"
+                + "<a href=/students" + Navigationbar + "> Studenter </a>"
                 + "<a href=/narvaro" + Navigationbar + "> Närvaro </a>"
                 + "<a href=/AddStudent" + Navigationbar + "> Add Studdents </a>"
                 + "<br>";
@@ -44,22 +44,22 @@ public class KursServlet extends HttpServlet {
 
             try {
                 Class.forName("com.mysql.cj.jdbc.Driver");
-                con = DriverManager.getConnection("jdbc:mysql://localhost:3306/gritacademy","user", "user");
+                con = DriverManager.getConnection("jdbc:mysql://localhost:3306/gritacademy", "user", "user");
                 st = con.createStatement();
                 rs = st.executeQuery("SELECT * FROM kurser");
-                out.println("<table " + tablestyler+ ">");
+                out.println("<table " + tablestyler + ">");
                 out.println("<tr>");
                 out.println("<th> id </th>");
                 out.println("<th> Name </th>");
                 out.println("<th> YHP </th>");
                 out.println("<th> Beskrivning </th>");
                 out.println("</tr>");
-                while (rs.next()){
+                while (rs.next()) {
                     out.println("<tr style = 'text-align: center;'>");
-                    out.println("<td " + tablestyler + ">" + rs.getInt(1)+"</td>"
+                    out.println("<td " + tablestyler + ">" + rs.getInt(1) + "</td>"
                             + "<td " + tablestyler + ">" + rs.getString(2) + "</td>"
-                            + "<td " + tablestyler + ">" +  rs.getString(3) + "</td>"
-                            + "<td " + tablestyler+ ">" + rs.getString(4)+"</td>");
+                            + "<td " + tablestyler + ">" + rs.getString(3) + "</td>"
+                            + "<td " + tablestyler + ">" + rs.getString(4) + "</td>");
                     out.println("</tr>");
                 }
                 con.close();
@@ -69,7 +69,7 @@ public class KursServlet extends HttpServlet {
             out.println("</table>");
             out.println("</body>");
             out.println("</html>");
-        }catch (Exception e) {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }

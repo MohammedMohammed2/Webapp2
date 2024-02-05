@@ -29,13 +29,14 @@ public class NärvaroServlet extends HttpServlet {
             "  padding: 14px 16px;\n" +
             "  text-decoration: none;\n" +
             "  font-size: 17px;color:black;background-color:cyan;\"";
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        tableData(request,response);
+        tableData(request, response);
         // Mysql connector.getConnector().connect();
     }
 
 
-    private void tableData(HttpServletRequest request, HttpServletResponse response) throws ServletException , IOException {
+    private void tableData(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PrintWriter out = response.getWriter();
 
         String top = "<html>" + "<body " + backgroundstyler + ">"

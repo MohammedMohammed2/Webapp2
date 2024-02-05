@@ -31,10 +31,11 @@ public class StudentsServlet extends HttpServlet {
             "  font-size: 17px;color:black;background-color:cyan;\"";
 
     @Override
-    protected void doPost (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-        selctedStudent(request,response);
-        showForm(request,response);
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        selctedStudent(request, response);
+        showForm(request, response);
     }
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         tableData(request, response);
@@ -97,18 +98,19 @@ public class StudentsServlet extends HttpServlet {
 
 
         out.println("<br>"
-            + "<div style='border:black solid; width:200px; padding:5px display:block; margin-left:auto; margin-right:auto; margin-top:5px; margin-bottom:5px;'>"
-            + "<form style='margin:5px;' action=/students method=POST>"
-            + "            <label for=fname>First Name:</label>"
-            + "            <input type=text id=fname name=fname required value=" + fname + " ><br><br>"
-            + "             <label for=fname>Last Name:</label>"
-            + "            <input type=text id=lname name=lname required value=" + lname + " ><br><br>"
-            + "            <input type=submit value=Submit>"
-            + "        </form>"
-            + "</div>"
-            + "<br>"
+                + "<div style='border:black solid; width:200px; padding:5px display:block; margin-left:auto; margin-right:auto; margin-top:5px; margin-bottom:5px;'>"
+                + "<form style='margin:5px;' action=/students method=POST>"
+                + "            <label for=fname>First Name:</label>"
+                + "            <input type=text id=fname name=fname required value=" + fname + " ><br><br>"
+                + "             <label for=fname>Last Name:</label>"
+                + "            <input type=text id=lname name=lname required value=" + lname + " ><br><br>"
+                + "            <input type=submit value=Submit>"
+                + "        </form>"
+                + "</div>"
+                + "<br>"
         );
     }
+
     private void selctedStudent(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         PrintWriter out = resp.getWriter();
         String top = "<html>" + "<body " + backgroundstyler + ">"
@@ -126,7 +128,7 @@ public class StudentsServlet extends HttpServlet {
                 con = DriverManager.getConnection("jdbc:mysql://localhost:3306/gritacademy", "user", "user");
 
                 st = con.createStatement();
-                rs = st.executeQuery("select s.id, s.Fname, s.Lname, k.YHP, k.name, k.beskrivning FROM studenter s  INNER JOIN närvaro n ON s.id = n.student_id INNER JOIN kurser k ON k.id = n.kurs_id where fname ='"+ req.getParameter("fname")+"'");
+                rs = st.executeQuery("select s.id, s.Fname, s.Lname, k.YHP, k.name, k.beskrivning FROM studenter s  INNER JOIN närvaro n ON s.id = n.student_id INNER JOIN kurser k ON k.id = n.kurs_id where fname ='" + req.getParameter("fname") + "'");
                 out.println("<table " + tablestyler + ">");
                 out.println("<tr>");
                 out.println("<th> id </th>");

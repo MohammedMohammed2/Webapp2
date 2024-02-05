@@ -33,7 +33,6 @@ public class UpdateStudentsServlet extends HttpServlet {
         updateStudent(request, response);
         showForm(request, response);
         response.sendRedirect("/students");
-
     }
 
     @Override
@@ -133,8 +132,8 @@ public class UpdateStudentsServlet extends HttpServlet {
                 try {
                     Class.forName("com.mysql.cj.jdbc.Driver");
 
-                     con = DriverManager.getConnection("jdbc:mysql://localhost:3306/gritacademy", "root", "");
-                     st= con.createStatement();
+                    con = DriverManager.getConnection("jdbc:mysql://localhost:3306/gritacademy", "root", "");
+                    st = con.createStatement();
 
                     PreparedStatement ps = con.prepareStatement("INSERT INTO studenter (fname, lname, town, hobby) VALUES (?, ?, ?, ?)");
 
