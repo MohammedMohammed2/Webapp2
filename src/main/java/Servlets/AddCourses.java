@@ -9,15 +9,14 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.*;
 
-@WebServlet(urlPatterns = "/AddStudent")
-public class UpdateStudentsServlet extends HttpServlet {
+@WebServlet(urlPatterns = "/AddCourse")
+public class AddCourses extends HttpServlet {
     private static final long serialVersionUID = 1L;
     public static Connection con;
     public static Statement st;
     public static ResultSet rs;
     public static String tablestyler = "style='border: 1px solid black; background-color: #96D4D4; margin-left: auto; margin-right: auto; width:40%; height:40%; margin-top: 50px;'";
     public static String backgroundstyler = "style=\"background-image: url('https://i.pinimg.com/originals/5e/9f/e2/5e9fe2b0bde19a68a87a095f92bc38aa.jpg');\"";
-
     public static String Navigationbar = " style=\"\n" +
             "  float: left;\n" +
             "  display: block;\n" +
@@ -26,13 +25,11 @@ public class UpdateStudentsServlet extends HttpServlet {
             "  padding: 14px 16px;\n" +
             "  text-decoration: none;\n" +
             "  font-size: 17px;color:black;background-color:cyan;\"";
-
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        updateStudent(request, response);
+        updateCourses(request, response);
         showForm(request, response);
-        response.sendRedirect("/students");
+        response.sendRedirect("/kurser");
     }
 
     @Override
@@ -43,38 +40,34 @@ public class UpdateStudentsServlet extends HttpServlet {
 
     private void tableData(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PrintWriter out = response.getWriter();
-        String top = "<html>" + "<body " + backgroundstyler + ">"
-                + "<h1 style=\"color:black;background-color:cyan;text-align: center;margin: 0;\">Studenter som går till skolan</h1>"
+        String top ="<html>" + "<body " + backgroundstyler + ">"
+                + "<h1 style=\"color:black;background-color:cyan;text-align: center;margin: 0;\">Kurser table</h1>"
                 + "<a href=\"http://localhost:9090\"" + Navigationbar + "> Home </a>"
-                + "<a href=/narvaro" + Navigationbar + "> Närvaro </a>"
+                + "<a href=/students" + Navigationbar + "> Studenter </a>"
                 + "<a href=/kurser" + Navigationbar + "> Kurser </a>"
-                + "<a href=/AddCourse" + Navigationbar + "> Add Courses </a>"
+                + "<a href=/narvaro" + Navigationbar + "> Närvaro </a>"
+                + "<a href=/AddStudent" + Navigationbar + "> Add Studdents </a>"
                 + "<br>";
-
         try {
             out.println(top);
             try {
                 Class.forName("com.mysql.cj.jdbc.Driver");
                 con = DriverManager.getConnection("jdbc:mysql://localhost:3306/gritacademy", "user", "user");
-
                 st = con.createStatement();
-                rs = st.executeQuery("SELECT * FROM studenter");
+                rs = st.executeQuery("SELECT * FROM kurser");
                 out.println("<table " + tablestyler + ">");
                 out.println("<tr>");
                 out.println("<th> id </th>");
                 out.println("<th> Name </th>");
-                out.println("<th> Lastname </th>");
-                out.println("<th> Town </th>");
-                out.println("<th> Hobby </th>");
+                out.println("<th> YHP </th>");
+                out.println("<th> Beskrivning </th>");
                 out.println("</tr>");
-
                 while (rs.next()) {
                     out.println("<tr style = 'text-align: center;'>");
                     out.println("<td " + tablestyler + ">" + rs.getInt(1) + "</td>"
                             + "<td " + tablestyler + ">" + rs.getString(2) + "</td>"
                             + "<td " + tablestyler + ">" + rs.getString(3) + "</td>"
-                            + "<td " + tablestyler + ">" + rs.getString(4) + "</td>"
-                            + "<td " + tablestyler + ">" + rs.getString(5) + "</td>");
+                            + "<td " + tablestyler + ">" + rs.getString(4) + "</td>");
                     out.println("</tr>");
                 }
                 con.close();
@@ -88,22 +81,19 @@ public class UpdateStudentsServlet extends HttpServlet {
             throw new RuntimeException(e);
         }
     }
-
     private void showForm(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/HTML");
         PrintWriter out = resp.getWriter();
 
         out.println("<br>"
                 + "<div style='border:black solid; width:200px; padding:5px display:block; margin-left:auto; margin-right:auto; margin-top:5px; margin-bottom:5px;'>"
-                + "<form style='margin:5px;' action=/AddStudent method=POST>"
-                + "            <label for=fname>First Name:</label>"
-                + "            <input pattern=\"[a-zA-Z]*\" type=text id=fname name=fname required><br><br>"
-                + "             <label for=fname>Last name:</label>"
-                + "            <input pattern=\"[a-zA-Z]*\" type=text id=lname name=lname required><br><br>"
-                + "             <label for=ort>town:</label>"
-                + "            <input pattern=\"[a-zA-Z]*\" type=text id=town name=town><br><br>"
-                + "             <label for=intressen>hobby:</label>"
-                + "            <input pattern=\"[a-zA-Z]*\" type=text id=hobby name=hobby><br><br>"
+                + "<form style='margin:5px;' action=/AddCourse method=POST>"
+                + "            <label for=name>Name:</label>"
+                + "            <input pattern=\"[a-zA-Z]*\" type=text id=name name=name required><br><br>"
+                + "             <label for=YHP>YHP:</label>"
+                + "            <input pattern=\"[1-50]*\" type=number id=YHP name=YHP><br><br>"
+                + "             <label for=beskrivning>Beskrivning:</label>"
+                + "            <input pattern=\"[a-zA-Z- ]*\" type=text id=beskrivning name=beskrivning><br><br>"
                 + "            <input type=submit value=Submit>"
                 + "        </form>"
                 + "</div>"
@@ -111,14 +101,15 @@ public class UpdateStudentsServlet extends HttpServlet {
         );
     }
 
-    private void updateStudent(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    private void updateCourses(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         PrintWriter out = resp.getWriter();
         String top = "<html>" + "<body " + backgroundstyler + ">"
-                + "<h1 style=\"color:black;background-color:cyan;text-align: center;margin: 0;\">Studenter som går till skolan</h1>"
+                + "<h1 style=\"color:black;background-color:cyan;text-align: center;margin: 0;\">Kurser table</h1>"
                 + "<a href=\"http://localhost:9090\"" + Navigationbar + "> Home </a>"
-                + "<a href=/narvaro" + Navigationbar + "> Närvaro </a>"
+                + "<a href=/students" + Navigationbar + "> Studenter </a>"
                 + "<a href=/kurser" + Navigationbar + "> Kurser </a>"
-                + "<a href=/AddCourse" + Navigationbar + "> Add Courses </a>"
+                + "<a href=/narvaro" + Navigationbar + "> Närvaro </a>"
+                + "<a href=/AddStudent" + Navigationbar + "> Add Studdents </a>"
                 + "<br>";
 
         try {
@@ -126,10 +117,9 @@ public class UpdateStudentsServlet extends HttpServlet {
             try {
                 resp.setContentType("text/HTML");
 
-                String fName = req.getParameter("fname");
-                String lName = req.getParameter("lname");
-                String town = req.getParameter("town");
-                String hobby = req.getParameter("hobby");
+                String name = req.getParameter("name");
+                String YHP = req.getParameter("YHP");
+                String beskrivning = req.getParameter("beskrivning");
 
                 try {
                     Class.forName("com.mysql.cj.jdbc.Driver");
@@ -137,12 +127,11 @@ public class UpdateStudentsServlet extends HttpServlet {
                     con = DriverManager.getConnection("jdbc:mysql://localhost:3306/gritacademy", "root", "");
                     st = con.createStatement();
 
-                    PreparedStatement ps = con.prepareStatement("INSERT INTO studenter (fname, lname, town, hobby) VALUES (?, ?, ?, ?)");
+                    PreparedStatement ps = con.prepareStatement("INSERT INTO kurser (name,YHP, beskrivning) VALUES (?, ?, ?)");
 
-                    ps.setString(1, fName);
-                    ps.setString(2, lName);
-                    ps.setString(3, town);
-                    ps.setString(4, hobby);
+                    ps.setString(1, name);
+                    ps.setString(2, YHP);
+                    ps.setString(3, beskrivning);
                     ps.executeUpdate();
 
                     con.close();
@@ -160,5 +149,3 @@ public class UpdateStudentsServlet extends HttpServlet {
         }
     }
 }
-
-
