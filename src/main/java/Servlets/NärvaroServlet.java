@@ -50,7 +50,6 @@ public class NärvaroServlet extends HttpServlet {
         try {
             out.println(top);
 
-
             try {
                 Class.forName("com.mysql.cj.jdbc.Driver");
                 con = DriverManager.getConnection("jdbc:mysql://localhost:3306/gritacademy", "user", "user");

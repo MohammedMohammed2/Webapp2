@@ -7,13 +7,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 
-@WebServlet(urlPatterns = "/students")
-public class StudentsServlet extends HttpServlet {
+@WebServlet(urlPatterns = "/Combine")
+public class CombineServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     public static Connection con;
     public static Statement st;
@@ -32,8 +29,9 @@ public class StudentsServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        selctedStudent(request, response);
+        updater(request,response);
         showForm(request, response);
+        response.sendRedirect("/narvaro");
     }
 
     @Override
@@ -41,8 +39,6 @@ public class StudentsServlet extends HttpServlet {
         tableData(request, response);
         showForm(request, response);
     }
-
-
     private void tableData(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PrintWriter out = response.getWriter();
         String top = "<html>" + "<body " + backgroundstyler + ">"
@@ -80,89 +76,92 @@ public class StudentsServlet extends HttpServlet {
                             + "<td " + tablestyler + ">" + rs.getString(5) + "</td>");
                     out.println("</tr>");
                 }
-                con.close();
             } catch (Exception e) {
                 System.out.println(e);
             }
             out.println("</table>");
+            rs = st.executeQuery("SELECT * FROM kurser");
+            out.println("<table " + tablestyler + ">");
+            out.println("<tr>");
+            out.println("<th> id </th>");
+            out.println("<th> Name </th>");
+            out.println("<th> YHP </th>");
+            out.println("<th> Beskrivning </th>");
+            out.println("</tr>");
+            while (rs.next()) {
+                out.println("<tr style = 'text-align: center;'>");
+                out.println("<td " + tablestyler + ">" + rs.getInt(1) + "</td>"
+                        + "<td " + tablestyler + ">" + rs.getString(2) + "</td>"
+                        + "<td " + tablestyler + ">" + rs.getString(3) + "</td>"
+                        + "<td " + tablestyler + ">" + rs.getString(4) + "</td>");
+                out.println("</tr>");
+            }
+            con.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        out.println("</table>");
             out.println("</body>");
             out.println("</html>");
-        } catch (Exception e) {
-            throw new RuntimeException(e);
         }
-    }
-
     private void showForm(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("text/HTML");
         PrintWriter out = resp.getWriter();
-        String fname = req.getParameter("fname") == null ? "" : req.getParameter("fname");
-        String lname = req.getParameter("lname") == null ? "" : req.getParameter("lname");
-
 
         out.println("<br>"
                 + "<div style='border:black solid; width:200px; padding:5px display:block; margin-left:auto; margin-right:auto; margin-top:5px; margin-bottom:5px;'>"
-                + "<form style='margin:5px;' action=/students method=POST>"
-                + "            <label for=fname>First Name:</label>"
-                + "            <input pattern=\"[a-zA-Z]*\" type=text id=fname name=fname required value=" + fname + " ><br><br>"
-                + "             <label for=fname>Last Name:</label>"
-                + "            <input pattern=\"[a-zA-Z]*\" type=text id=lname name=lname required value=" + lname + " ><br><br>"
+                + "<form style='margin:5px;' action=/Combine method=POST>"
+                + "            <label for=student_id>StudentID:</label>"
+                + "            <input type=number id=student_id name=student_id required><br><br>"
+                + "             <label for=kurs_id>CourseID:</label>"
+                + "            <input type=number id=kurs_id name=kurs_id required><br><br>"
                 + "            <input type=submit value=Submit>"
                 + "        </form>"
                 + "</div>"
                 + "<br>"
         );
     }
-
-    private void selctedStudent(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    private void updater(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         PrintWriter out = resp.getWriter();
-        boolean studentFinder = false;
         String top = "<html>" + "<body " + backgroundstyler + ">"
                 + "<h1 style=\"color:black;background-color:cyan;text-align: center;margin: 0;\">Studenter som går till skolan</h1>"
                 + "<a href=\"http://localhost:9090\"" + Navigationbar + "> Home </a>"
                 + "<a href=/narvaro" + Navigationbar + "> Närvaro </a>"
                 + "<a href=/kurser" + Navigationbar + "> Kurser </a>"
-                + "<a href=/AddStudent" + Navigationbar + "> Add Studdents </a>"
                 + "<a href=/AddCourse" + Navigationbar + "> Add Courses </a>"
                 + "<br>";
 
         try {
             out.println(top);
             try {
-                Class.forName("com.mysql.cj.jdbc.Driver");
-                con = DriverManager.getConnection("jdbc:mysql://localhost:3306/gritacademy", "user", "user");
+                resp.setContentType("text/HTML");
 
-                st = con.createStatement();
-                rs = st.executeQuery("select s.id, s.Fname, s.Lname, k.YHP, k.name, k.beskrivning FROM studenter s  INNER JOIN närvaro n ON s.id = n.student_id INNER JOIN kurser k ON k.id = n.kurs_id where fname ='" + req.getParameter("fname") + "'");
-                out.println("<table " + tablestyler + ">");
-                out.println("<tr>");
-                out.println("<th> id </th>");
-                out.println("<th> Name </th>");
-                out.println("<th> Last name</th>");
-                out.println("<th> YHP </th>");
-                out.println("<th> Kurs</th>");
-                out.println("<th> Beskrivning </th>");
-                out.println("</tr>");
-                while (rs.next()) {
-                    studentFinder = true;
-                    out.println("<tr style = 'text-align: center;'>");
-                    out.println("<td " + tablestyler + ">" + rs.getInt(1) + "</td>" +
-                            "<td " + tablestyler + ">" + rs.getString(2) + "</td>" +
-                            "<td " + tablestyler + ">" + rs.getString(3) + "</td>" +
-                            "<td " + tablestyler + ">" + rs.getString(4) + "</td>" +
-                            "<td " + tablestyler + ">" + rs.getString(5) + "</td>" +
-                            "<td " + tablestyler + ">" + rs.getString(6) + "</td>");
-                    out.println("</tr>");
+                String student_id = req.getParameter("student_id");
+                String kurs_id = req.getParameter("kurs_id");
+
+                try {
+                    Class.forName("com.mysql.cj.jdbc.Driver");
+
+                    con = DriverManager.getConnection("jdbc:mysql://localhost:3306/gritacademy", "root", "");
+                    st = con.createStatement();
+
+                    PreparedStatement ps = con.prepareStatement("INSERT INTO närvaro (student_id, kurs_id) VALUES (?, ?)");
+
+                    ps.setString(1, student_id);
+                    ps.setString(2, kurs_id);
+                    ps.executeUpdate();
+
+                    con.close();
+                } catch (Exception e) {
+                    System.out.println(e);
                 }
+                out.println("</table>");
+                out.println("</body>");
+                out.println("</html>");
             } catch (Exception e) {
-
+                throw new RuntimeException(e);
             }
-            out.println("</table>");
-            if (!studentFinder) {
-                out.println("<p style ='color:red;margin-top:50px; text-align: center; font-size: 17px;'> The Student cant be found </p>");
-            }
-            con.close();
-            out.println("</body>");
-            out.println("</html>");
-        } catch (Exception e) {
+        } catch (RuntimeException e) {
             throw new RuntimeException(e);
         }
     }
