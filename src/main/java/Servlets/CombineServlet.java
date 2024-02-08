@@ -118,6 +118,7 @@ public class CombineServlet extends HttpServlet {
                 + "             <label for=kurs_id>CourseID:</label>"
                 + "            <input type=number id=kurs_id name=kurs_id required><br><br>"
                 + "            <input type=submit value=Submit>"
+                + "            <button type=button id=reset onclick=location.href='/Combine'> reset </button>"
                 + "        </form>"
                 + "</div>"
                 + "<br>"
