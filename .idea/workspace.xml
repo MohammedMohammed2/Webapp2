@@ -5,11 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2d5f79b4-c0d5-405a-b3c6-0e76bea76c21" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Servlets/CombineServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Servlets/NärvaroServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Servlets/NärvaroServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Servlets/AddCourses.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Servlets/AddCourses.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Servlets/CombineServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Servlets/CombineServlet.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Servlets/StudentsServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Servlets/StudentsServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Servlets/UpdateStudentsServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Servlets/UpdateStudentsServlet.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,22 +36,22 @@
     <setting file="file://$PROJECT_DIR$/src/main/java/Servlets/UpdateStudentsServlet.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/main/webapp/index.html" root0="SKIP_INSPECTION" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 8
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
   <component name="ProjectId" id="2bli5BvL4qDgwdPqhPEgL4Oc7nc" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;
   }
-}]]></component>
+}</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">

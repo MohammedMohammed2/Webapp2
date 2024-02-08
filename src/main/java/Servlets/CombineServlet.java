@@ -142,7 +142,7 @@ public class CombineServlet extends HttpServlet {
                 try {
                     Class.forName("com.mysql.cj.jdbc.Driver");
 
-                    con = DriverManager.getConnection("jdbc:mysql://localhost:3306/gritacademy", "root", "");
+                    con = DriverManager.getConnection("jdbc:mysql://localhost:3306/gritacademy", "inserter", "inserter");
                     st = con.createStatement();
 
                     PreparedStatement ps = con.prepareStatement("INSERT INTO närvaro (student_id, kurs_id) VALUES (?, ?)");

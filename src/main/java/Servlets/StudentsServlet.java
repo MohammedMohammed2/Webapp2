@@ -105,7 +105,8 @@ public class StudentsServlet extends HttpServlet {
                 + "            <input pattern=\"[a-zA-Z]*\" type=text id=fname name=fname required value=" + fname + " ><br><br>"
                 + "             <label for=fname>Last Name:</label>"
                 + "            <input pattern=\"[a-zA-Z]*\" type=text id=lname name=lname required value=" + lname + " ><br><br>"
-                + "            <input type=submit value=Submit>"
+                + "            <input type=submit id=submit value=Submit>"
+                + "            <button type=button id=reset onclick=location.href='/students'> reset </button>"
                 + "        </form>"
                 + "</div>"
                 + "<br>"
@@ -131,7 +132,7 @@ public class StudentsServlet extends HttpServlet {
                 con = DriverManager.getConnection("jdbc:mysql://localhost:3306/gritacademy", "user", "user");
 
                 st = con.createStatement();
-                rs = st.executeQuery("select s.id, s.Fname, s.Lname, k.YHP, k.name, k.beskrivning FROM studenter s  INNER JOIN närvaro n ON s.id = n.student_id INNER JOIN kurser k ON k.id = n.kurs_id where fname ='" + req.getParameter("fname") + "'");
+                rs = st.executeQuery("select s.id, s.Fname, s.Lname, k.YHP, k.name, k.beskrivning FROM studenter s  INNER JOIN närvaro n ON s.id = n.student_id INNER JOIN kurser k ON k.id = n.kurs_id where fname ='" + req.getParameter("fname") +"'AND" + " " +"lname='"+ req.getParameter("lname") + "'");
                 out.println("<table " + tablestyler + ">");
                 out.println("<tr>");
                 out.println("<th> id </th>");

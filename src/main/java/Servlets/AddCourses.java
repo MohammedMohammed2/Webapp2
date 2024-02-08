@@ -124,7 +124,7 @@ public class AddCourses extends HttpServlet {
                 try {
                     Class.forName("com.mysql.cj.jdbc.Driver");
 
-                    con = DriverManager.getConnection("jdbc:mysql://localhost:3306/gritacademy", "root", "");
+                    con = DriverManager.getConnection("jdbc:mysql://localhost:3306/gritacademy", "inserter", "inserter");
                     st = con.createStatement();
 
                     PreparedStatement ps = con.prepareStatement("INSERT INTO kurser (name,YHP, beskrivning) VALUES (?, ?, ?)");
