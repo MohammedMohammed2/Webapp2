@@ -15,7 +15,10 @@ public class CombineServlet extends HttpServlet {
     public static Connection con;
     public static Statement st;
     public static ResultSet rs;
-    public static String tablestyler = "style='border: 1px solid black; background-color: #96D4D4; margin-left: auto; margin-right: auto; width:40%; height:40%; margin-top: 50px;'";
+    public static String tablestyler = "style='border: 1px solid black; background-color: #96D4D4; margin-left: auto; margin-right: auto; width:40%; height:20%; margin-top: 50px;'";
+    public static String tablestyler2 = "style='border: 1px solid black; background-color: #96D4D4; float:right;  width:40%; height:50%; margin-top: 85px;'";
+    public static String tablestyler3 = "style='border: 1px solid black; background-color: #96D4D4; float:left; width:40%; height:auto;  margin-top: 50px;'";
+
     public static String backgroundstyler = "style=\"background-image: url('https://i.pinimg.com/originals/5e/9f/e2/5e9fe2b0bde19a68a87a095f92bc38aa.jpg');\"";
 
     public static String Navigationbar = " style=\"\n"
@@ -58,7 +61,7 @@ public class CombineServlet extends HttpServlet {
 
                 st = con.createStatement();
                 rs = st.executeQuery("SELECT * FROM studenter");
-                out.println("<table " + tablestyler + ">");
+                out.println("<table " + tablestyler2 + ">");
                 out.println("<tr>");
                 out.println("<th> id </th>");
                 out.println("<th> Name </th>");
@@ -81,7 +84,7 @@ public class CombineServlet extends HttpServlet {
             }
             out.println("</table>");
             rs = st.executeQuery("SELECT * FROM kurser");
-            out.println("<table " + tablestyler + ">");
+            out.println("<table " + tablestyler3 + ">");
             out.println("<tr>");
             out.println("<th> id </th>");
             out.println("<th> Name </th>");
@@ -109,7 +112,7 @@ public class CombineServlet extends HttpServlet {
         PrintWriter out = resp.getWriter();
 
         out.println("<br>"
-                + "<div style='border:black solid; width:200px; padding:5px display:block; margin-left:auto; margin-right:auto; margin-top:5px; margin-bottom:5px;'>"
+                + "<div style='border:black solid; width:200px; padding:5px display:block; margin-left:auto; margin-right:auto; margin-top:5px; margin-top:450px;'>"
                 + "<form style='margin:5px;' action=/Combine method=POST>"
                 + "            <label for=student_id>StudentID:</label>"
                 + "            <input type=number id=student_id name=student_id required><br><br>"
