@@ -12,12 +12,13 @@ import java.sql.*;
 @WebServlet(urlPatterns = "/AddCourse")
 public class AddCourses extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    public static Connection con;
-    public static Statement st;
-    public static ResultSet rs;
-    public static String tablestyler = "style='border: 1px solid black; background-color: #96D4D4; margin-left: auto; margin-right: auto; width:40%; height:40%; margin-top: 50px;'";
-    public static String backgroundstyler = "style=\"background-image: url('https://i.pinimg.com/originals/5e/9f/e2/5e9fe2b0bde19a68a87a095f92bc38aa.jpg');\"";
-    public static String Navigationbar = " style=\"\n" +
+    private static Connection con;
+    private static PreparedStatement ps;
+    private static Statement st;
+    private static ResultSet rs;
+    private static String tablestyler = "style='border: 1px solid black; background-color: #96D4D4; margin-left: auto; margin-right: auto; width:40%; height:40%; margin-top: 50px;'";
+    private static String backgroundstyler = "style=\"background-image: url('https://i.pinimg.com/originals/5e/9f/e2/5e9fe2b0bde19a68a87a095f92bc38aa.jpg');\"";
+    private static String Navigationbar = " style=\"\n" +
             "  float: left;\n" +
             "  display: block;\n" +
             "  color: black;\n" +
@@ -29,7 +30,6 @@ public class AddCourses extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         updateCourses(request, response);
         showForm(request, response);
-        response.sendRedirect("/kurser");
     }
 
     @Override
@@ -96,6 +96,7 @@ public class AddCourses extends HttpServlet {
                 + "             <label for=beskrivning>Beskrivning:</label>"
                 + "            <input pattern=\"[a-zA-Z- ]*\" type=text id=beskrivning name=beskrivning><br><br>"
                 + "            <input type=submit value=Submit>"
+                + "            <button type=button id=reset onclick=location.href='/AddCourse'> reset </button>"
                 + "        </form>"
                 + "</div>"
                 + "<br>"
@@ -104,6 +105,7 @@ public class AddCourses extends HttpServlet {
 
     private void updateCourses(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         PrintWriter out = resp.getWriter();
+
         String top = "<html>" + "<body " + backgroundstyler + ">"
                 + "<h1 style=\"color:black;background-color:cyan;text-align: center;margin: 0;\">Kurser table</h1>"
                 + "<a href=\"http://localhost:9090\"" + Navigationbar + "> Home </a>"
@@ -111,43 +113,44 @@ public class AddCourses extends HttpServlet {
                 + "<a href=/kurser" + Navigationbar + "> Kurser </a>"
                 + "<a href=/narvaro" + Navigationbar + "> Närvaro </a>"
                 + "<a href=/AddStudent" + Navigationbar + "> Add Studdents </a>"
-                +" <a href=/Combine" + Navigationbar +"> combine </a>"
+                + " <a href=/Combine" + Navigationbar + "> combine </a>"
                 + "<br>";
 
+        out.println(top);
         try {
-            out.println(top);
+            resp.setContentType("text/HTML");
+
+            String name = req.getParameter("name");
+            String YHP = req.getParameter("YHP");
+            String beskrivning = req.getParameter("beskrivning");
+            boolean studentFinder = false;
+
             try {
-                resp.setContentType("text/HTML");
+                Class.forName("com.mysql.cj.jdbc.Driver");
 
-                String name = req.getParameter("name");
-                String YHP = req.getParameter("YHP");
-                String beskrivning = req.getParameter("beskrivning");
+                con = DriverManager.getConnection("jdbc:mysql://localhost:3306/gritacademy", "inserter", "inserter");
+                st = con.createStatement();
+                ps = con.prepareStatement("INSERT INTO kurser (name,YHP, beskrivning) VALUES (?, ?, ?)");
 
-                try {
-                    Class.forName("com.mysql.cj.jdbc.Driver");
-
-                    con = DriverManager.getConnection("jdbc:mysql://localhost:3306/gritacademy", "inserter", "inserter");
-                    st = con.createStatement();
-
-                    PreparedStatement ps = con.prepareStatement("INSERT INTO kurser (name,YHP, beskrivning) VALUES (?, ?, ?)");
-
-                    ps.setString(1, name);
-                    ps.setString(2, YHP);
-                    ps.setString(3, beskrivning);
-                    ps.executeUpdate();
-
-                    con.close();
-                } catch (Exception e) {
-                    System.out.println(e);
-                }
-                out.println("</table>");
-                out.println("</body>");
-                out.println("</html>");
+                ps.setString(1, name);
+                ps.setString(2, YHP);
+                ps.setString(3, beskrivning);
+                ps.executeUpdate();
+                con.close();
             } catch (Exception e) {
-                throw new RuntimeException(e);
+                studentFinder = true;
             }
-        } catch (RuntimeException e) {
-            throw new RuntimeException(e);
+            if (studentFinder) {
+                out.println("<p style ='color:red;margin-top:50px; text-align: center; font-size: 17px;'> Cannot add course beacause the course already exists </p>");
+            }else{
+                resp.sendRedirect("/kurser");
+            }
+
+            out.println("</table>");
+            out.println("</body>");
+            out.println("</html>");
+        } catch (Exception e) {
+
         }
     }
 }

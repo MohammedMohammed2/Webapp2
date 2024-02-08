@@ -34,7 +34,6 @@ public class CombineServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         updater(request,response);
         showForm(request, response);
-        response.sendRedirect("/narvaro");
     }
 
     @Override
@@ -141,6 +140,7 @@ public class CombineServlet extends HttpServlet {
 
                 String student_id = req.getParameter("student_id");
                 String kurs_id = req.getParameter("kurs_id");
+                boolean studentFinder = false;
 
                 try {
                     Class.forName("com.mysql.cj.jdbc.Driver");
@@ -155,9 +155,14 @@ public class CombineServlet extends HttpServlet {
                     ps.executeUpdate();
 
                     con.close();
-                } catch (Exception e) {
-                    System.out.println(e);
-                }
+                }catch (Exception e) {
+                        studentFinder = true;
+                    }
+                    if (studentFinder) {
+                        out.println("<p style ='color:red;margin-top:50px; text-align: center; font-size: 17px;'> Cannot add the student to this course beacause the student is already apart of this course </p>");
+                    }else{
+                        resp.sendRedirect("/narvaro");
+                    }
                 out.println("</table>");
                 out.println("</body>");
                 out.println("</html>");
