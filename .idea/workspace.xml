@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="2d5f79b4-c0d5-405a-b3c6-0e76bea76c21" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Servlets/CombineServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Servlets/CombineServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Servlets/AddCourses.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Servlets/AddCourses.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

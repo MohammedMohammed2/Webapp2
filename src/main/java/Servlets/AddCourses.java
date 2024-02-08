@@ -92,7 +92,7 @@ public class AddCourses extends HttpServlet {
                 + "            <label for=name>Name:</label>"
                 + "            <input pattern=\"[a-zA-Z]*\" type=text id=name name=name required><br><br>"
                 + "             <label for=YHP>YHP:</label>"
-                + "            <input pattern=\"[1-50]*\" type=number id=YHP name=YHP><br><br>"
+                + "            <input min=0 max= 50 type=number id=YHP name=YHP><br><br>"
                 + "             <label for=beskrivning>Beskrivning:</label>"
                 + "            <input pattern=\"[a-zA-Z- ]*\" type=text id=beskrivning name=beskrivning><br><br>"
                 + "            <input type=submit value=Submit>"
