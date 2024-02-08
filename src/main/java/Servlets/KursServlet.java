@@ -39,6 +39,7 @@ public class KursServlet extends HttpServlet {
                 + "<a href=/narvaro" + Navigationbar + "> Närvaro </a>"
                 + "<a href=/AddStudent" + Navigationbar + "> Add Studdents </a>"
                 + "<a href=/AddCourse" + Navigationbar + "> Add Courses </a>"
+                +" <a href=/Combine" + Navigationbar +"> combine </a>"
                 + "<br>";
         try {
             out.println(top);

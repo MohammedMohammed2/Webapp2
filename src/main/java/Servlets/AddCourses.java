@@ -47,6 +47,7 @@ public class AddCourses extends HttpServlet {
                 + "<a href=/kurser" + Navigationbar + "> Kurser </a>"
                 + "<a href=/narvaro" + Navigationbar + "> Närvaro </a>"
                 + "<a href=/AddStudent" + Navigationbar + "> Add Studdents </a>"
+                +" <a href=/Combine" + Navigationbar +"> combine </a>"
                 + "<br>";
         try {
             out.println(top);
@@ -110,6 +111,7 @@ public class AddCourses extends HttpServlet {
                 + "<a href=/kurser" + Navigationbar + "> Kurser </a>"
                 + "<a href=/narvaro" + Navigationbar + "> Närvaro </a>"
                 + "<a href=/AddStudent" + Navigationbar + "> Add Studdents </a>"
+                +" <a href=/Combine" + Navigationbar +"> combine </a>"
                 + "<br>";
 
         try {

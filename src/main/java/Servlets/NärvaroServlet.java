@@ -32,7 +32,6 @@ public class NärvaroServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         tableData(request, response);
-        // Mysql connector.getConnector().connect();
     }
 
 
@@ -46,6 +45,7 @@ public class NärvaroServlet extends HttpServlet {
                 + "<a href=/kurser" + Navigationbar + "> Kurser </a>"
                 + "<a href=/AddStudent" + Navigationbar + "> Add Studdents </a>"
                 + "<a href=/AddCourse" + Navigationbar + "> Add Courses </a>"
+                +" <a href=/Combine" + Navigationbar +"> combine </a>"
                 + "<br>";
         try {
             out.println(top);

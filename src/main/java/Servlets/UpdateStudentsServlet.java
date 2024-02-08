@@ -49,6 +49,7 @@ public class UpdateStudentsServlet extends HttpServlet {
                 + "<a href=/narvaro" + Navigationbar + "> Närvaro </a>"
                 + "<a href=/kurser" + Navigationbar + "> Kurser </a>"
                 + "<a href=/AddCourse" + Navigationbar + "> Add Courses </a>"
+                +" <a href=/Combine" + Navigationbar +"> combine </a>"
                 + "<br>";
 
         try {
@@ -101,10 +102,10 @@ public class UpdateStudentsServlet extends HttpServlet {
                 + "             <label for=fname>Last name:</label>"
                 + "            <input pattern=\"[a-zA-Z]*\" type=text id=lname name=lname required><br><br>"
                 + "             <label for=ort>town:</label>"
-                + "            <input pattern=\"[a-zA-Z]*\" type=text id=town name=town><br><br>"
+                + "            <input pattern=\"[a-zA-Z-äöå]*\" type=text id=town name=town><br><br>"
                 + "             <label for=intressen>hobby:</label>"
-                + "            <input pattern=\"[a-zA-Z- ]*\" type=text id=hobby name=hobby><br><br>"
-                + "            <input type=submit id=submit value=Submit>"
+                + "            <input pattern=\"[a-zA-Z-äåö]*\" type=text id=hobby name=hobby><br><br>"
+                + "            <input type=submit value=Submit>"
                 + "        </form>"
                 + "</div>"
                 + "<br>"
@@ -119,6 +120,7 @@ public class UpdateStudentsServlet extends HttpServlet {
                 + "<a href=/narvaro" + Navigationbar + "> Närvaro </a>"
                 + "<a href=/kurser" + Navigationbar + "> Kurser </a>"
                 + "<a href=/AddCourse" + Navigationbar + "> Add Courses </a>"
+                +" <a href=/Combine" + Navigationbar +"> combine </a>"
                 + "<br>";
 
         try {
@@ -134,7 +136,7 @@ public class UpdateStudentsServlet extends HttpServlet {
                 try {
                     Class.forName("com.mysql.cj.jdbc.Driver");
 
-                    con = DriverManager.getConnection("jdbc:mysql://localhost:3306/gritacademy", "root", "");
+                    con = DriverManager.getConnection("jdbc:mysql://localhost:3306/gritacademy", "inserter", "inserter");
                     st = con.createStatement();
 
                     PreparedStatement ps = con.prepareStatement("INSERT INTO studenter (fname, lname, town, hobby) VALUES (?, ?, ?, ?)");
