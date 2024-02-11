@@ -32,8 +32,9 @@ public class CombineServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        updater(request,response);
+        tableData(request,response);
         showForm(request, response);
+        updater(request,response);
     }
 
     @Override
@@ -126,16 +127,7 @@ public class CombineServlet extends HttpServlet {
     }
     private void updater(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         PrintWriter out = resp.getWriter();
-        String top = "<html>" + "<body " + backgroundstyler + ">"
-                + "<h1 style=\"color:black;background-color:cyan;text-align: center;margin: 0;\">Studenter som går till skolan</h1>"
-                + "<a href=\"http://localhost:9090\"" + Navigationbar + "> Home </a>"
-                + "<a href=/narvaro" + Navigationbar + "> Närvaro </a>"
-                + "<a href=/kurser" + Navigationbar + "> Kurser </a>"
-                + "<a href=/AddCourse" + Navigationbar + "> Add Courses </a>"
-                + "<br>";
 
-        try {
-            out.println(top);
             try {
                 resp.setContentType("text/HTML");
 
@@ -159,20 +151,14 @@ public class CombineServlet extends HttpServlet {
                 }catch (Exception e) {
                         studentFinder = true;
                     }
-                    if (studentFinder) {
-                        out.println("<p style ='color:red;margin-top:50px; text-align: center; font-size: 17px;'> Cannot add the student to this course beacause the student is already apart of this course </p>");
-                    }else{
-                        resp.sendRedirect("/narvaro");
-                    }
-                out.println("</table>");
-                out.println("</body>");
-                out.println("</html>");
+                if (studentFinder) {
+                    out.println("<p style ='color:red;margin-top:50px;text-align: center; font-size: 15px; background-color:black; width:20%; margin-right:auto; margin-left:auto;'> Cannot add the student to this course beacause the student is already apart of this course </p>");
+                }else{
+                    resp.sendRedirect("/narvaro");
+                }
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
-        } catch (RuntimeException e) {
-            throw new RuntimeException(e);
-        }
     }
 }
 

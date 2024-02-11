@@ -28,6 +28,7 @@ public class AddCourses extends HttpServlet {
             "  font-size: 17px;color:black;background-color:cyan;\"";
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        tableData(request,response);
         updateCourses(request, response);
         showForm(request, response);
     }
@@ -105,18 +106,6 @@ public class AddCourses extends HttpServlet {
 
     private void updateCourses(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         PrintWriter out = resp.getWriter();
-
-        String top = "<html>" + "<body " + backgroundstyler + ">"
-                + "<h1 style=\"color:black;background-color:cyan;text-align: center;margin: 0;\">Kurser table</h1>"
-                + "<a href=\"http://localhost:9090\"" + Navigationbar + "> Home </a>"
-                + "<a href=/students" + Navigationbar + "> Studenter </a>"
-                + "<a href=/kurser" + Navigationbar + "> Kurser </a>"
-                + "<a href=/narvaro" + Navigationbar + "> Närvaro </a>"
-                + "<a href=/AddStudent" + Navigationbar + "> Add Studdents </a>"
-                + " <a href=/Combine" + Navigationbar + "> combine </a>"
-                + "<br>";
-
-        out.println(top);
         try {
             resp.setContentType("text/HTML");
 
@@ -141,14 +130,11 @@ public class AddCourses extends HttpServlet {
                 studentFinder = true;
             }
             if (studentFinder) {
-                out.println("<p style ='color:red;margin-top:50px; text-align: center; font-size: 17px;'> Cannot add course beacause the course already exists </p>");
+                out.println("<p style ='color:red;margin-top:50px; text-align: center; font-size: 17px; background-color:black; width:20%; margin-right:auto; margin-left:auto;'> Cannot add course beacause the course already exists </p>");
             }else{
                 resp.sendRedirect("/kurser");
             }
 
-            out.println("</table>");
-            out.println("</body>");
-            out.println("</html>");
         } catch (Exception e) {
 
         }
