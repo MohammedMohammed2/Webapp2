@@ -48,6 +48,7 @@ public class CombineServlet extends HttpServlet {
                 + "<h1 style=\"color:black;background-color:cyan;text-align: center;margin: 0;\">Studenter som går till skolan</h1>"
                 + "<a href=\"http://localhost:9090\"" + Navigationbar + "> Home </a>"
                 + "<a href=narvaro" + Navigationbar + "> Närvaro </a>"
+                + "<a href=/students" + Navigationbar + "> Studenter </a>"
                 + "<a href=/kurser" + Navigationbar + "> Kurser </a>"
                 + "<a href=/AddStudent" + Navigationbar + "> Add Studdents </a>"
                 + "<a href=/AddCourse" + Navigationbar + "> Add Courses </a>"
