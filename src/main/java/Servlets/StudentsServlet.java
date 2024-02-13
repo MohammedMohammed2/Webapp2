@@ -15,13 +15,13 @@ import java.sql.Statement;
 @WebServlet(urlPatterns = "/students")
 public class StudentsServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    public static Connection con;
-    public static Statement st;
-    public static ResultSet rs;
-    public static String tablestyler = "style='border: 1px solid black; background-color: #96D4D4; margin-left: auto; margin-right: auto; width:40%; height:40%; margin-top: 50px;'";
-    public static String backgroundstyler = "style=\"background-image: url('https://i.pinimg.com/originals/5e/9f/e2/5e9fe2b0bde19a68a87a095f92bc38aa.jpg');\"";
+    private static Connection con;
+    private static Statement st;
+    private static ResultSet rs;
+    private static String tablestyler = "style='border: 1px solid black; background-color: #96D4D4; margin-left: auto; margin-right: auto; width:40%; height:40%; margin-top: 50px;'";
+    private static String backgroundstyler = "style=\"background-image: url('https://i.pinimg.com/originals/5e/9f/e2/5e9fe2b0bde19a68a87a095f92bc38aa.jpg');\"";
 
-    public static String Navigationbar = " style=\"\n"
+    private static String Navigationbar = " style=\"\n"
             + "  float: left;\n"
             + "  display: block;\n"
             + "  color: black;\n"

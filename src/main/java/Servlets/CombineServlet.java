@@ -12,16 +12,16 @@ import java.sql.*;
 @WebServlet(urlPatterns = "/Combine")
 public class CombineServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    public static Connection con;
-    public static Statement st;
-    public static ResultSet rs;
-    public static String tablestyler = "style='border: 1px solid black; background-color: #96D4D4; margin-left: auto; margin-right: auto; width:40%; height:15%; margin-top: 50px;'";
-    public static String tablestyler2 = "style='border: 1px solid black; background-color: #96D4D4; float:right;  width:40%; height:50%; margin-top: 85px;'";
-    public static String tablestyler3 = "style='border: 1px solid black; background-color: #96D4D4; float:left; width:40%; height:5%;  margin-top: 50px;'";
+    private static Connection con;
+    private static Statement st;
+    private static ResultSet rs;
+    private static String tablestyler = "style='border: 1px solid black; background-color: #96D4D4; margin-left: auto; margin-right: auto; width:40%; height:15%; margin-top: 50px;'";
+    private static String tablestyler2 = "style='border: 1px solid black; background-color: #96D4D4; float:right;  width:40%; height:50%; margin-top: 85px;'";
+    private static String tablestyler3 = "style='border: 1px solid black; background-color: #96D4D4; float:left; width:40%; height:5%;  margin-top: 50px;'";
 
-    public static String backgroundstyler = "style=\"background-image: url('https://i.pinimg.com/originals/5e/9f/e2/5e9fe2b0bde19a68a87a095f92bc38aa.jpg');\"";
+    private static String backgroundstyler = "style=\"background-image: url('https://i.pinimg.com/originals/5e/9f/e2/5e9fe2b0bde19a68a87a095f92bc38aa.jpg');\"";
 
-    public static String Navigationbar = " style=\"\n"
+    private static String Navigationbar = " style=\"\n"
             + "  float: left;\n"
             + "  display: block;\n"
             + "  color: black;\n"
